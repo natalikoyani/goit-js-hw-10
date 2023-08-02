@@ -1,14 +1,13 @@
 import { fetchBreeds, fetchCatByBreed } from "./cat-api";
 import SlimSelect from 'slim-select';
 import 'slim-select/dist/slimselect.css';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 const select = document.querySelector('.breed-select');
 let catInfo = document.querySelector('.cat-info');
 const loader = document.querySelector('.loader');
-const error = document.querySelector('.error');
 
 select.hidden = true;
-error.hidden = true;
 
 fetchBreeds()
     .then(response => {
@@ -25,7 +24,7 @@ fetchBreeds()
     })
     .catch(err => {
         loader.hidden = true;
-        error.hidden = false;
+        Notify.failure('Oops! Something went wrong! Try reloading the page!');
     })
 
     
@@ -35,7 +34,6 @@ select.addEventListener('change', chooseBreed);
 function chooseBreed(evt) {
     let breedId = evt.target.value;
     catInfo.innerHTML = '';
-    error.hidden = true;
     loader.hidden = false;
     fetchCatByBreed(breedId)
     .then(response => {
@@ -52,7 +50,7 @@ function chooseBreed(evt) {
     })
     .catch(err => {
         loader.hidden = true;
-        error.hidden = false;
+        Notify.failure('Oops! Something went wrong! Try reloading the page!');
     })    
 }
 
