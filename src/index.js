@@ -38,13 +38,17 @@ function chooseBreed(evt) {
     fetchCatByBreed(breedId)
     .then(response => {
         catInfo.innerHTML = `
-            <img
-            src = ${response.data[0].url}
-            alt = ${response.data[0].breeds[0].name}
-            width = '400'/>
-            <h2>${response.data[0].breeds[0].name}<h2/>
-            <p>${response.data[0].breeds[0].description}<p/>
-            <p><span>Temperament:<span/> ${response.data[0].breeds[0].temperament}<p/>
+            <div class="cat-picture">
+                <img
+                src = ${response.data[0].url}
+                alt = ${response.data[0].breeds[0].name}
+                width = '400'/>
+            </div>
+            <div class="cat-text">
+                <h2 class="cat-name">${response.data[0].breeds[0].name}<h2/>
+                <p class="cat-description">${response.data[0].breeds[0].description}<p/>
+                <p class="cat-character"><span class="temperament">Temperament:</span> ${response.data[0].breeds[0].temperament}<p/>
+            </div>
             `
             loader.hidden = true;
     })
