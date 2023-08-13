@@ -20,10 +20,10 @@ fetchBreeds()
             }
         })
         select.hidden = false;
-        loader.hidden = true;
+        loader.classList.add("is-hidden");
     })
     .catch(err => {
-        loader.hidden = true;
+        loader.classList.add("is-hidden");
         Notify.failure('Oops! Something went wrong! Try reloading the page!');
     })
 
@@ -34,7 +34,7 @@ select.addEventListener('change', chooseBreed);
 function chooseBreed(evt) {
     let breedId = evt.target.value;
     catInfo.innerHTML = '';
-    loader.hidden = false;
+    loader.classList.remove("is-hidden");
     fetchCatByBreed(breedId)
     .then(response => {
         catInfo.innerHTML = `
@@ -50,10 +50,10 @@ function chooseBreed(evt) {
                 <p class="cat-character"><span class="temperament">Temperament:</span> ${response.data[0].breeds[0].temperament}<p/>
             </div>
             `
-            loader.hidden = true;
+            loader.classList.add("is-hidden");
     })
     .catch(err => {
-        loader.hidden = true;
+        loader.classList.add("is-hidden");
         Notify.failure('Oops! Something went wrong! Try reloading the page!');
     })    
 }
